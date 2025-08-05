@@ -28,6 +28,7 @@ var globes = (function () {
    * @returns {Object} the projection bounds clamped to the specified view.
    */
   function clampedBounds(bounds, view) {
+    console.log(bounds);
     var upperLeft = bounds[0];
     var lowerRight = bounds[1];
     var x = Math.max(Math.floor(ensureNumber(upperLeft[0], 0)), 0);
@@ -246,7 +247,15 @@ var globes = (function () {
   function equirectangular() {
     return newGlobe({
       newProjection: function () {
-        return d3.geo.equirectangular().rotate(currentPosition()).precision(0.1);
+        return d3.geo.equirectangular().precision(0.1);
+        // return d3.geo.equirectangular().rotate(currentPosition()).precision(0.1);
+      },
+    });
+  }
+  function mercator() {
+    return newGlobe({
+      newProjection: function () {
+        return d3.geo.mercator().rotate(currentPosition()).precision(0.1);
       },
     });
   }
@@ -349,6 +358,7 @@ var globes = (function () {
     azimuthal_equidistant: azimuthalEquidistant,
     conic_equidistant: conicEquidistant,
     equirectangular: equirectangular,
+    mercator: mercator,
     orthographic: orthographic,
     stereographic: stereographic,
     waterman: waterman,

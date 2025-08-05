@@ -574,6 +574,7 @@
     if (!globe || !field || !grids) return;
 
     log.debug(grids);
+    console.log(field);
 
     var cancel = this.cancel;
     var bounds = globe.bounds(view);
@@ -954,10 +955,10 @@
       .attr("height", label.offsetHeight / 2);
 
     d3.select("#show-menu").on("click", function () {
+      d3.select("#menu").classed("invisible", !d3.select("#menu").classed("invisible"));
       if (µ.isEmbeddedInIFrame()) {
-        window.open("http://earth.nullschool.net/" + window.location.hash, "_blank");
+        // window.open("http://earth.nullschool.net/" + window.location.hash, "_blank");
       } else {
-        d3.select("#menu").classed("invisible", !d3.select("#menu").classed("invisible"));
       }
     });
 
